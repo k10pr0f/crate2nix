@@ -37,32 +37,34 @@ let
         buildInputs = lib.optionals stdenv.isDarwin [ darwin.apple_sdk.frameworks.Security ];
       };
     }
+
+
       let
         addLibiconvOverride = prev: {
           buildInputs = (prev.buildInputs or [ ]) ++ (with pkgs; lib.optional stdenv.isDarwin libiconv);
         };
         addLibiconvToAll = libs: lib.genAttrs libs (_: addLibiconvOverride);
       in
-      addLibiconvToAll [
-        "anyhow"
-        "bitflags"
-        "crate2nix"
-        "crossbeam-utils"
-        "libc"
-        "log"
-        "memchr"
-        "pest_derive"
-        "proc-macro-error"
-        "proc-macro-error-attr"
-        "proc-macro2"
-        "ryu"
-        "serde"
-        "serde_derive"
-        "serde_json"
-        "structopt-derive"
-        "syn"
-        "typenum"
-      ]
+        addLibiconvToAll [
+            "anyhow"
+            "bitflags"
+            "crate2nix"
+            "crossbeam-utils"
+            "libc"
+            "log"
+            "memchr"
+            "pest_derive"
+            "proc-macro-error"
+            "proc-macro-error-attr"
+            "proc-macro2"
+            "ryu"
+            "serde"
+            "serde_derive"
+            "serde_json"
+            "structopt-derive"
+            "syn"
+            "typenum"
+        ]
   };
   set_templates = if release then "" else "--set TEMPLATES_DIR ${./crate2nix/templates}";
 in
