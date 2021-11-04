@@ -36,9 +36,7 @@ let
       cssparser-macros = attrs: assert builtins.trace "cssparser" true;{
         buildInputs = lib.optionals stdenv.isDarwin [ darwin.apple_sdk.frameworks.Security ];
       };
-    }
-
-
+    } // (
       let
         addLibiconvOverride = prev: {
           buildInputs = (prev.buildInputs or [ ]) ++ (with pkgs; lib.optional stdenv.isDarwin libiconv);
@@ -65,6 +63,7 @@ let
             "syn"
             "typenum"
         ]
+    );
   };
   set_templates = if release then "" else "--set TEMPLATES_DIR ${./crate2nix/templates}";
 in
