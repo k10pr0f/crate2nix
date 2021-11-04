@@ -37,7 +37,7 @@ let
         buildInputs = lib.optionals stdenv.isDarwin [ darwin.apple_sdk.frameworks.Security ];
       };
     }
-    let
+      let
         addLibiconvOverride = prev: {
           buildInputs = (prev.buildInputs or [ ]) ++ (with pkgs; lib.optional stdenv.isDarwin libiconv);
         };
