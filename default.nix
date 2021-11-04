@@ -63,7 +63,6 @@ let
         "syn"
         "typenum"
       ]
-    );
   };
   set_templates = if release then "" else "--set TEMPLATES_DIR ${./crate2nix/templates}";
 in
